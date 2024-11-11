@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine3.20
+FROM php:8.2-fpm-alpine
 LABEL authors="anna"
 # ENV ADMIN="anna"
 RUN apk update && apk upgrade && apk add bash
