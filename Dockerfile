@@ -21,7 +21,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS imagemagick-dev \
 RUN apk add libgomp
 
 RUN apk add --no-cache composer
-#RUN apk add --no-cache xdebug
+
 RUN apk add --update linux-headers
 
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
@@ -29,6 +29,6 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-enable xdebug \
     && apk del -f .build-deps
 
-WORKDIR /var/wwwmage
+WORKDIR /var/www
 
 #CMD ["supervisord", "-c", "/etc/supervisor.d/supervisord.ini"]
