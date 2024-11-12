@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM postgres:latest
 LABEL authors="anna"
 
-ENTRYPOINT ["top", "-b"]
+COPY ./conf/northwind.sql /docker-entrypoint-initdb.d/

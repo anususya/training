@@ -22,8 +22,9 @@ services:
         - ./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/php.ini
         - ./docker/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         - ./logs/php.log:/var/log/fpm-php.www.log
+
    db:
-    image: postgres:10.1
+    build: ./docker/db
     restart: always
     environment:
       - POSTGRES_DB=${DB_NAME}
