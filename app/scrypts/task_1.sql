@@ -1,11 +1,12 @@
-DROP TABLE IF EXISTS regions CASCADE;
+DROP DATABASE IF EXISTS task1 WITH (FORCE);
+CREATE DATABASE task1;
+
+\c task1
 
 CREATE TABLE regions (
 	region_id serial,
 	region_name varchar NOT NULL
 );
-
-DROP TABLE IF EXISTS factories CASCADE;
 
 CREATE TABLE factories (
 	factory_id serial,
@@ -13,15 +14,11 @@ CREATE TABLE factories (
 	region_id int NOT NULL
 );
 
-DROP TABLE IF EXISTS machines CASCADE;
-
 CREATE TABLE machines (
 	machine_id serial,
 	machine_name varchar NOT NULL ,
 	factory_id int NOT NULL
 );
-
-DROP TABLE IF EXISTS products CASCADE;
 
 CREATE TABLE products (
 	product_id serial,
@@ -30,16 +27,12 @@ CREATE TABLE products (
 	packaging_id int NOT NULL
 );
 
-DROP TABLE IF EXISTS factories_products;
-
 CREATE TABLE factories_products (
     product_id int NOT NULL,
     factory_id int NOT NULL,
 
     CONSTRAINT product_factory_pkey PRIMARY KEY (product_id, factory_id)
 );
-
-DROP TABLE IF EXISTS machines_products;
 
 CREATE TABLE machines_products (
     product_id int NOT NULL,
@@ -48,15 +41,11 @@ CREATE TABLE machines_products (
     CONSTRAINT product_machine_pkey PRIMARY KEY (product_id, machine_id)
 );
 
-DROP TABLE IF EXISTS orders CASCADE;
-
 CREATE TABLE orders (
 	order_id serial,
 	factory_id int NOT NULL ,
 	date timestamp NOT NULL
 );
-
-DROP TABLE IF EXISTS delivery_cost;
 
 CREATE TABLE delivery_cost (
 	delivery_cost_id serial,
@@ -65,8 +54,6 @@ CREATE TABLE delivery_cost (
 	price_per_unit decimal NOT NULL ,
 	total_amount decimal NOT NULL
 );
-
-DROP TABLE IF EXISTS order_items;
 
 CREATE TABLE order_items (
 	order_item_id serial,
@@ -81,8 +68,6 @@ CREATE TABLE order_items (
 	total_amount decimal NOT NULL
 );
 
-DROP TABLE IF EXISTS dates CASCADE;
-
 CREATE TABLE dates (
 	date date NOT NULL,
 	week_day char,
@@ -92,8 +77,6 @@ CREATE TABLE dates (
 	year smallint
 );
 
-DROP TABLE IF EXISTS weekly_fix_cost;
-
 CREATE TABLE weekly_fix_cost (
 	fix_cost_id serial,
 	machine_id int NOT NULL ,
@@ -102,8 +85,6 @@ CREATE TABLE weekly_fix_cost (
 	total_amount decimal NOT NULL ,
 	region_id int NOT NULL
 );
-
-DROP TABLE IF EXISTS weekly_packaging_cost;
 
 CREATE TABLE weekly_packaging_cost (
 	packing_id serial,
@@ -153,7 +134,7 @@ ALTER TABLE factories_products ADD CONSTRAINT fk_products_factories FOREIGN KEY 
 
 ALTER TABLE orders ADD CONSTRAINT fk_orders_factories FOREIGN KEY (factory_id) REFERENCES factories;
 
-ALTER TABLE orders ADD CONSTRAINT fk_orders_dates FOREIGN KEY (date) REFERENCES dates;
+ALTER TABLE orders ADD CONSTRAINT fk_orders_dates FOREIGN KEY (date) REFERENCES dates(date);
 
 ALTER TABLE delivery_cost ADD CONSTRAINT fk_delivery_orders FOREIGN KEY (order_id) REFERENCES orders;
 
@@ -161,12 +142,12 @@ ALTER TABLE order_items ADD CONSTRAINT fk_order_items_orders FOREIGN KEY (order_
 
 ALTER TABLE order_items ADD CONSTRAINT fk_order_item_products FOREIGN KEY (item_id) REFERENCES products;
 
-ALTER TABLE weekly_packaging_cost ADD CONSTRAINT fk_pack_week FOREIGN KEY (week) REFERENCES dates;
+ALTER TABLE weekly_packaging_cost ADD CONSTRAINT fk_pack_week FOREIGN KEY (week) REFERENCES dates(week);
 
 ALTER TABLE weekly_packaging_cost ADD CONSTRAINT fk_pack_product FOREIGN KEY (product_id) REFERENCES products;
 
 ALTER TABLE weekly_fix_cost ADD CONSTRAINT fk_week_fix_machine FOREIGN KEY (machine_id) REFERENCES machines;
 
-ALTER TABLE weekly_fix_cost ADD CONSTRAINT fk_week_fix_week FOREIGN KEY (week) REFERENCES dates;
+ALTER TABLE weekly_fix_cost ADD CONSTRAINT fk_week_fix_week FOREIGN KEY (week) REFERENCES dates(week);
 
 ALTER TABLE weekly_fix_cost ADD CONSTRAINT fk_factories_regions FOREIGN KEY (region_id) REFERENCES regions;

@@ -1,3 +1,5 @@
 <?php
+require_once 'fakedata/FakeProductData.php';
 
-echo "Hello World!";
+$fakerProducts = new FakeProductData();
+$fakerProducts->generate();

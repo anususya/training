@@ -1,0 +1,1 @@
+ALTER TABLE products ALTER COLUMN product_id TYPE INT4;

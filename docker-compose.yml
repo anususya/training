@@ -44,6 +44,9 @@ services:
         ipv4_address: 192.168.2.8
     ports:
       - 5432:5432
+    volumes:
+      - ./docker/db/conf/northwind.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./app/scrypts:/var/www/html/scrypts
 networks:
   my_net:
     driver: bridge

@@ -62,7 +62,7 @@ GROUP BY
 HAVING
     sum(freight) > 2750
 ORDER BY
-    summary DESC
+    summary DESC;
 
 
 SELECT
