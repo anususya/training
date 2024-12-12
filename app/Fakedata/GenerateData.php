@@ -1,16 +1,20 @@
 <?php
-require_once (__DIR__.'/../vendor/autoload.php');
 
+namespace Fakedata;
+
+use Faker\Factory;
+use Faker\Generator;
+use Iterator as Iterator;
 class GenerateData
 {
     public array $data = [];
-    private $faker = null;
+    private ?Generator $faker = null;
 
     public function generateFakeData(int $from = 78, int $to = 79): Iterator
     {
         for ($i = $from; $i <= $to; $i++) {
             if (!$this->faker) {
-                $this->faker = Faker\Factory::create();
+                $this->faker = Factory::create();
             }
 
             $this->data['product_id'] = $i;
@@ -26,5 +30,20 @@ class GenerateData
 
             yield $this->data;
         }
+    }
+
+    public function generateArray(int $count, int $from = 1, int $to = 999): array
+    {
+        if (!$this->faker) {
+            $this->faker = Factory::create();
+        }
+
+        $array = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $array[$i] = $this->faker->numberBetween($from, $to);
+        }
+
+        return $array;
     }
 }

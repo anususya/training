@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="">
+<body>
+<h1><?php print_r(ucwords($name));?></h1>
+<?php
+print_r('Init array:');
+print_r('<br>');
+print_r($qwerty);
+print_r('<br>');
+print_r('Result:');
+print_r('<br>');
+print_r($a->sort($qwerty));
+print_r('<br>');
+?>
+
+<div class="form_container">
+    <form id="myform" onsubmit="return handle_form_submission()">
+        <label for="num">Search element:</label><br>
+        <input type="text" name='name' id='name' placeholder='Name'/>
+        <button type='submit'>Post it</button>
+    </form>
+</div>
+</body>
+</html>
+
+<script>
+    function handle_form_submission()
+    {
+        alert('Button Clicked');
+        var fd = new FormData();
+        fd.append('key', 'value')
+
+        $.ajax({
+            url: '/search',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data){
+                alert(data);
+            }
+        });
+    }
+</script>
