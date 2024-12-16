@@ -11,8 +11,8 @@ class BinarySearch
         $operations = 0;
 
         while ($left <= $right) {
-            //const mid = Math.floor((left + right) / 2);
-            $mid = intdiv(count($numbersArray), 2);
+            $operations += 1;
+            $mid = intdiv(($left + $right), 2);
 
             if ($numbersArray[$mid] === $targetNumber) {
                 $foundIndex =  $mid; // Элемент найден
@@ -23,9 +23,8 @@ class BinarySearch
                 $right = $mid - 1; // Ищем в левой половине
             }
 
-            $operations += 1;
         }
 
-        return [$foundIndex, $operations ]; // Элемент не найден
+        return [$foundIndex, $operations]; // Элемент не найден
     }
 }

@@ -8,12 +8,11 @@ class LineSearch
         $foundIndex = -1;
         $operations = 0;
         for ($i = 0; $i < count($numbersArray); $i++) {
+            $operations += 1;
             if ($numbersArray[$i] === $targetNumber) {
                 $foundIndex = $i;
                 return [ $foundIndex, $operations ]; // Элемент найден
             }
-
-            $operations += 1;
         }
 
         return [$foundIndex, $operations ]; // Элемент не найден

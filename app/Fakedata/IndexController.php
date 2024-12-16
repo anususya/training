@@ -22,6 +22,7 @@ class IndexController
                 }
             }
             DB::closeConnection();
+            echo 'Generated';
 
         } catch (Exception $e) {
             die($e->getMessage());

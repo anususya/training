@@ -1,0 +1,19 @@
+<div>
+    <span>Init:</span>
+    <br>
+    <span><?php print_r($this->blockVariables['init']); ?></span>
+    <br>
+    <span>Result:</span>
+    <br>
+    <span><?php $this->blockVariables['deque']->printFromStart(); ?></span>
+    <br>
+    <span> <?php $a = $this->blockVariables['deque']->popFront();
+    echo $a? $a->value : 'Очередь пуста';
+    ?></span>
+    <br>
+    <span> <?php $a = $this->blockVariables['deque']->popFront();
+        echo $a? $a->value : 'Очередь пуста';
+        ?></span>
+    <br>
+    <span><?php $this->blockVariables['deque']->printFromStart(); ?></span>
+</div>

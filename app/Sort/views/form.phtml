@@ -1,0 +1,19 @@
+<?php foreach ($this->result as $name=>$value) { ?>
+<h1><?php print_r(ucwords($name));?></h1>
+    <span>Init array:</span><br>
+    <?php
+        foreach ($value['old'] as $el) {
+            echo $el . ' ';
+        }
+    ?>
+    <br>
+
+    <span>Result:</span><br>
+    <?php
+        foreach ($value['new'] as $el) {
+            echo $el . ' ';
+        }
+    ?>
+    <br>
+<?php } ?>
+

@@ -1,0 +1,28 @@
+<div>
+    <span>Init array:</span>
+    <br>
+    <div id="generated_array">
+        <?php
+        foreach ($this->blockVariables['random_array'] as $el) {
+            echo $el . ' ';
+        }
+        ?>
+    </div>
+
+    <span>Sorted array:</span>
+    <br>
+    <div id="sorted_array">
+        <?php
+        foreach ($this->blockVariables['sorted_array'] as $el) {
+            echo $el . ' ';
+        }
+        ?>
+    </div>
+</div>
+    <div class="form_container">
+        <form id="myform" method="post" onsubmit="return handle_form_submission()">
+            <label for="num">Search element:</label><br>
+            <input type="number" name='name' id='name' placeholder='Name'/>
+            <button type='submit'>Post it</button>
+        </form>
+    </div>

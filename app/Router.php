@@ -27,8 +27,12 @@ class Router
     {
         $path = $this->normalizePath($path);
         $method = strtoupper($_SERVER['REQUEST_METHOD']);
+        $test = explode('/', trim($path, '/'));
         foreach ($this->routes as $route) {
-            if (!preg_match("#^{$route['path']}/$#", $path) || $route['method'] !== $method) {
+            //if (!preg_match("#^{$route['path']}/$#", $path) || $route['method'] !== $method) {
+            //  continue;
+            // }
+            if (!preg_match("#^{$route['path']}$#", '/'.$test[0]) || $route['method'] !== $method) {
                 continue;
             }
 

@@ -7,23 +7,22 @@ use Fakedata\GenerateData;
 class MainController
 {
     private const SORT_NAMES = ['bubble','quick','merge'];
+    private array $result = [];
     public function index(): void
     {
-
         foreach (self::SORT_NAMES as $name) {
             $generateData = new GenerateData();
-            $qwerty = $generateData->generateArray(30, 1, 999);
-            //print_r('Init array:');
-            //print_r('<br>');
-            //print_r($qwerty);
-            //print_r('<br>');
-            //print_r(ucwords($name));
-           // print_r('<br>');
-            $a = SortFactory::create($name);
-            //print_r($a->sort($qwerty));
-            //print_r('<br>');
-
-            include('views/index.phtml');
+            $randomArray = $generateData->generateArray(30);
+            $sort = SortFactory::create($name);
+            $sortResult = $sort->sort($randomArray);
+            $this->result[$name]['old']= $randomArray;
+            $this->result[$name]['new']= $sortResult;
         }
+        include('views/index.phtml');
+    }
+
+    public function getBlock(): void
+    {
+        include('views/form.phtml');
     }
 }
