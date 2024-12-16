@@ -3,12 +3,12 @@ namespace Search;
 
 use Search\Model\LineSearch as LineSearch;
 use Search\Model\BinarySearch as BinarySearch;
+use Search\Model\Search as SearchModel;
 use Fakedata\GenerateData;
 use Sort\SortFactory;
 
 class IndexController
 {
-    private array $randomArray = array();
     public array $blockVariables = array();
     public function index(): void
     {
@@ -22,12 +22,13 @@ class IndexController
 
     public function search(): void
     {
-        $search = $_POST['search'] ?? '';
+        $searchItem= $_POST['search'] ?? '';
         $array = isset($_POST['array']) ? explode(' ', trim($_POST['array'])) : [];
-
-        $binary = BinarySearch::search($array, $search);
-        $line = LineSearch::search($array, $search);
-
+        $search = new SearchModel();
+        //$binary = BinarySearch::search($array, $searchItem);
+        //$line = LineSearch::search($array, $searchItem);
+        $binary = $search->search($searchItem, $array, [$search, 'binarySearch']);
+        $line = $search->search($searchItem, $array, [$search, 'lineSearch']);
         if ($line[0] == -1) {
             $result = 'Element not found';
         } else {
