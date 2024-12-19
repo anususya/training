@@ -7,13 +7,13 @@
     <br>
     <span><?php $this->blockVariables['deque']->printFromStart(); ?></span>
     <br>
-    <span> <?php $a = $this->blockVariables['deque']->popFront();
-    echo $a? $a->value : 'Очередь пуста';
+    <span> <?php $item = $this->blockVariables['deque']->popFront();
+    echo $item ? $item->value : 'Очередь пуста';
     ?></span>
     <br>
-    <span> <?php $a = $this->blockVariables['deque']->popFront();
-        echo $a? $a->value : 'Очередь пуста';
-        ?></span>
+    <span> <?php $item = $this->blockVariables['deque']->popFront();
+    echo $item ? $item->value : 'Очередь пуста';
+    ?></span>
     <br>
     <span><?php $this->blockVariables['deque']->printFromStart(); ?></span>
 </div>

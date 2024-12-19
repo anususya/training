@@ -40,7 +40,9 @@ class Router
 
             $controllerInstance = new $class;
             $controllerInstance->{$function}();
+            return;
         }
 
+        echo 'Page not found';
     }
 }
