@@ -1,17 +1,22 @@
 <?php
 
+namespace Fakedata;
+
+use Exception;
+use PDO as PDO;
+use PDOException as PDOException;
 class DB
 {
     private const HOST = "192.168.2.8";
-    private const  USERNAME = "admin";
-    private const  PASSWORD = "admin";
-    private const  DATABASE = "test";
-    private const  PORT = "5432";
+    private const USERNAME = "admin";
+    private const PASSWORD = "admin";
+    private const DATABASE = "test";
+    private const PORT = "5432";
 
-    private static $instance = null;
-    private $pdo = null;
+    private static ?DB $instance = null;
+    private ?PDO $pdo = null;
 
-    public static function getConnection()
+    public static function getConnection(): ?DB
     {
         if (!self::$instance) {
             self::$instance = new DB();
@@ -20,15 +25,18 @@ class DB
         return self::$instance;
     }
 
-    public static function closeConnection()
+    public static function closeConnection(): void
     {
         self::$instance->pdo = null;
     }
 
-    public function insert($table, $data)
+    /**
+     * @throws Exception
+     */
+    public function insert($table, $data): void
     {
         if (!$this->pdo) {
-            throw Exception('Connection not established');
+            throw new Exception('Connection not established');
         }
 
         $query = 'INSERT INTO ' . $table . ' (';
@@ -47,7 +55,10 @@ class DB
         $statement->execute($data);
     }
 
-    public function getMaxValue($table, $column)
+    /**
+     * @throws Exception
+     */
+    public function getMaxValue($table, $column): ?int
     {
         if (!$this->pdo) {
             throw new Exception('Connection not established');
@@ -69,5 +80,4 @@ class DB
             die($e->getMessage());
         }
     }
-
 }
